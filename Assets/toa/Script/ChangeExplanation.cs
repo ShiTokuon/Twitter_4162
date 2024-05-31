@@ -10,7 +10,7 @@ public class ChangeExplanation : MonoBehaviour
         // Spaceキー押すとシーン移行
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // SampleSceneに切り替える
+            // ゲーム説明に切り替える
             SceneManager.LoadScene("ExplanationScene");
         }
     }
