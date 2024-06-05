@@ -27,7 +27,6 @@ public class HPbarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         _parent = transform.parent.transform.localRotation.eulerAngles;
         if (before != _parent)
         {
