@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     private Vector2 _inputVelocity;
     private Rigidbody2D _rigid;
+    Vector3 worldAngle; //Šp“x‚ð‘ã“ü‚·‚é
 
     void Start()
     {
@@ -24,8 +25,41 @@ public class Player : MonoBehaviour
 
     private void _Move()
     {
-        _rigid.velocity = _inputVelocity * _speed;
+        Vector3 position = transform.position;
+
+        if (_inputVelocity.y > 0 && position.y < 4.5)
+        {
+            position.y += _speed * Time.deltaTime;
+        }
+        else if (_inputVelocity.y < 0 && position.y > -4.5)
+        {
+            position.y -= _speed * Time.deltaTime;
+        }
+        else
+        {
+            _rigid.velocity = new Vector2(_rigid.velocity.x, 0);
+        }
+
+        if (_inputVelocity.x < 0 && position.x > -2.5)
+        {
+            worldAngle.y = 0f;//’Êí‚ÌŒü‚«
+            this.transform.localEulerAngles = worldAngle;//Ž©•ª‚ÌŠp“x‚É‘ã“ü‚·‚é
+            position.x -= _speed * Time.deltaTime;
+        }
+        else if (_inputVelocity.x > 0 && position.x < 2.5)
+        {
+            worldAngle.y = -180f;//‰EŒü‚«‚ÌŠp“x
+            this.transform.localEulerAngles = worldAngle;//Ž©•ª‚ÌŠp“x‚É‘ã“ü
+            position.x += _speed * Time.deltaTime;
+        }
+        else
+        {
+            _rigid.velocity = new Vector2(0, _rigid.velocity.y);
+        }
+
+        transform.position = position;
     }
+
 
     public void Onmove(InputAction.CallbackContext context)
     {
