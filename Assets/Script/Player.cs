@@ -11,16 +11,43 @@ public class Player : MonoBehaviour
     private Vector2 _inputVelocity;
     private Rigidbody2D _rigid;
     Vector3 worldAngle; //角度を代入する
+    public SpriteRenderer spriteRenderer;
+    private float currentTime;
+    [SerializeField] GameObject punch;
+    [SerializeField] Sprite imageIdle;
+    [SerializeField] Sprite imagePunch;
+
 
     void Start()
     {
         _inputVelocity = Vector2.zero;
         _rigid = GetComponent<Rigidbody2D>();
+        spriteRenderer.sprite = imageIdle;//待機状態の画像
+        punch.GetComponent<BoxCollider2D>().enabled = false;//Punchの当たり判定をなくす
     }
 
     void Update()
     {
+        // 時間を更新
+        currentTime += Time.deltaTime;
+
+        // 2秒ごとに実行
+        if (currentTime > statusdata.SPAN)
+        {
+            spriteRenderer.sprite = imagePunch; // Playerの画像を攻撃用の画像に切り替える
+            punch.GetComponent<BoxCollider2D>().enabled = true; // あたり判定をつける
+            StartCoroutine("Punchswitch"); // 攻撃を持続させるためのコルーチンを起動する
+            currentTime = 0f;
+        }
+
         _Move();
+    }
+
+    IEnumerator Punchswitch()
+    {
+        yield return new WaitForSeconds(5);//5秒後に下の2行を実行する
+        spriteRenderer.sprite = imageIdle;//待機状態の画像に切り替える
+        punch.GetComponent<BoxCollider2D>().enabled = false;//あたり判定をなくす
     }
 
     private void _Move()

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +15,10 @@ public class EnemyScript : MonoBehaviour
     Vector3 vector;
     private Rigidbody2D rb;
 
+    [SerializeField] GameObject Hitmark;//â˜‘
+    Vector3 Hitpos;//â˜‘
+
+
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -25,51 +29,62 @@ public class EnemyScript : MonoBehaviour
     }
     void Update()
     {
-        PlayerPos = Player.transform.position;//ƒvƒŒƒCƒ„[‚ÌŒ»İˆÊ’u‚ğæ“¾
+        PlayerPos = Player.transform.position;//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç¾åœ¨ä½ç½®ã‚’å–å¾—
         transform.position = Vector2.MoveTowards(transform.position,
-            PlayerPos, statusdata.SPEED * Time.deltaTime);//Œ»İˆÊ’u‚©‚çƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ÉŒü‚¯‚ÄˆÚ“®
-        diff.x = PlayerPos.x - this.transform.position.x;//ƒvƒŒƒCƒ„[‚Æ“GƒLƒƒƒ‰‚ÌX²‚ÌˆÊ’uŠÖŒW‚ğæ“¾‚·‚é
+            PlayerPos, statusdata.SPEED * Time.deltaTime);//ç¾åœ¨ä½ç½®ã‹ã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã«å‘ã‘ã¦ç§»å‹•
+        diff.x = PlayerPos.x - this.transform.position.x;//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æ•µã‚­ãƒ£ãƒ©ã®Xè»¸ã®ä½ç½®é–¢ä¿‚ã‚’å–å¾—ã™ã‚‹
         if (diff.x > 0)
-        {//Player‚ª“GƒLƒƒƒ‰‚Ì‰E‘¤‚É‚¢‚é‰E‘¤‚ğŒü‚­
+        {//PlayerãŒæ•µã‚­ãƒ£ãƒ©ã®å³å´ã«ã„ã‚‹æ™‚å³å´ã‚’å‘ã
             vector = new Vector3(0, -180, 0);
             this.transform.eulerAngles = vector;
         }
         if (diff.x < 0)
-        {//Player‚ª“GƒLƒƒƒ‰‚Ì¶‘¤‚É‚¢‚é¶‘¤‚ğŒü‚­
+        {//PlayerãŒæ•µã‚­ãƒ£ãƒ©ã®å·¦å´ã«ã„ã‚‹æ™‚å·¦å´ã‚’å‘ã
             vector = new Vector3(0, 0, 0);
             this.transform.eulerAngles = vector;
         }
 
-        if (MUTEKI)//UŒ‚‚ğó‚¯‚Ä‚©‚ç0.2•bŒã‚É‚·‚éˆ—
+        if (MUTEKI)//æ”»æ’ƒã‚’å—ã‘ã¦ã‹ã‚‰0.2ç§’å¾Œã«ã™ã‚‹å‡¦ç†
         {
             currentTime += Time.deltaTime;
             if (currentTime > statusdata.SPAN)
             {
                 currentTime = 0f;
-                MUTEKI = false;//–³“Gó‘ÔI‚í‚ç‚¹‚é
-                rb.velocity = new Vector2(0, 0);//ƒmƒbƒNƒoƒbƒN‚ğ‚Æ‚ß‚é   
+                MUTEKI = false;//ç„¡æ•µçŠ¶æ…‹çµ‚ã‚ã‚‰ã›ã‚‹
+                rb.velocity = new Vector2(0, 0);//ãƒãƒƒã‚¯ãƒãƒƒã‚¯ã‚’ã¨ã‚ã‚‹ 
+                Hitmark.GetComponent<SpriteRenderer>().enabled = false; //ãƒ’ãƒƒãƒˆãƒãƒ¼ã‚¯ç”»åƒã‚’éè¡¨ç¤ºã«æˆ»ã™â˜‘
             }
 
         }
-        if (HP <= 0)//HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚çÁ‚¦‚é
+
+        if (HP <= 0)//HPãŒ0ä»¥ä¸‹ã«ãªã£ãŸã‚‰æ¶ˆãˆã‚‹
         {
+            Hitpos = this.transform.position;
+            Hitpos.z = -2f;
+            Hitmark.transform.position = Hitpos;
+            Hitmark.GetComponent<SpriteRenderer>().enabled = true;
             Destroy(this.gameObject);
         }
     }
 
+
     public void Damage(float damage)
     {
         if (!MUTEKI)
-        {//–³“Gó‘Ô‚¶‚á‚È‚¢‚Æ‚«‚ÉUŒ‚‚ğó‚¯‚é
-            HP -= damage;//HPŒ¸­
-            Debug.Log(HP);//Œ»İ‚ÌHP‚ğ•\¦
-            MUTEKI = true;//–³“Gó‘Ô‚É‚·‚é
+        {//ç„¡æ•µçŠ¶æ…‹ã˜ã‚ƒãªã„ã¨ãã«æ”»æ’ƒã‚’å—ã‘ã‚‹
+            Hitpos = this.transform.position;
+            Hitpos.z = -3f;//Zè»¸ã‚’æ•µã‚­ãƒ£ãƒ©ã‚ˆã‚Šã‚‚æ‰‹å‰ã«è¨­å®š
+            Hitmark.transform.position = Hitpos;//ãƒ’ãƒƒãƒˆãƒãƒ¼ã‚¯ã®ç”»åƒä½ç½®ã‚’ç§»å‹•ã•ã›ã‚‹
+            Hitmark.GetComponent<SpriteRenderer>().enabled = true; //ãƒ’ãƒƒãƒˆãƒãƒ¼ã‚¯ç”»åƒã‚’è¡¨ç¤ºã™ã‚‹â˜‘
+            HP -= damage;//HPæ¸›å°‘
+            Debug.Log(HP);//ç¾åœ¨ã®HPã‚’è¡¨ç¤º
+            MUTEKI = true;//ç„¡æ•µçŠ¶æ…‹ã«ã™ã‚‹
         }
     }
     public void NockBack(float nockback)
     {
         Vector2 thisPos = transform.position;
-        float distination = thisPos.x - PlayerPos.x;//UŒ‚‚ğó‚¯‚Ä“_‚Å‚Ì“GƒLƒƒƒ‰‚ÆƒvƒŒƒCƒ„[‚Æ‚ÌˆÊ’uŠÖŒW   
-        rb.velocity = new Vector2(distination * nockback, 0);//‰£‚Á‚½•ûŒü‚É”ò‚ñ‚Å‚¢‚­
+        float distination = thisPos.x - PlayerPos.x;//æ”»æ’ƒã‚’å—ã‘ã¦æ™‚ç‚¹ã§ã®æ•µã‚­ãƒ£ãƒ©ã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®ä½ç½®é–¢ä¿‚   
+        rb.velocity = new Vector2(distination * nockback, 0);//æ®´ã£ãŸæ–¹å‘ã«é£›ã‚“ã§ã„ã
     }
 }
