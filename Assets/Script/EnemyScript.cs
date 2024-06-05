@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    [SerializeField, Header("ステータス")]
+    StatusData statusdata;
 
     GameObject Player;
     Vector3 PlayerPos;
-
-    private float speed = 0.5f;
 
     Vector3 diff;
     Vector3 vector;
@@ -24,7 +24,8 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
         PlayerPos = Player.transform.position;//プレイヤーの現在位置を取得
-        transform.position = Vector2.MoveTowards(transform.position, PlayerPos, speed * Time.deltaTime);//現在位置からプレイヤーの位置に向けて移動
+        transform.position = Vector2.MoveTowards(transform.position,
+            PlayerPos, statusdata.SPEED * Time.deltaTime);//現在位置からプレイヤーの位置に向けて移動
         diff.x = PlayerPos.x - this.transform.position.x;//プレイヤーと敵キャラのX軸の位置関係を取得する
         if (diff.x > 0)
         {//Playerが敵キャラの右側にいる時右側を向く

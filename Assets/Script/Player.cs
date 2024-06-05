@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField, Header("移動速度")]//Unity上で移動速度の値を変更出来るようにする
-    private float _speed;
+    [SerializeField,Header("ステータス")] 
+    StatusData statusdata;
 
     private Vector2 _inputVelocity;
     private Rigidbody2D _rigid;
@@ -29,11 +29,11 @@ public class Player : MonoBehaviour
 
         if (_inputVelocity.y > 0 && position.y < 4.5)
         {
-            position.y += _speed * Time.deltaTime;
+            position.y += statusdata.SPEED * Time.deltaTime;
         }
         else if (_inputVelocity.y < 0 && position.y > -4.5)
         {
-            position.y -= _speed * Time.deltaTime;
+            position.y -= statusdata.SPEED * Time.deltaTime;
         }
         else
         {
@@ -44,13 +44,13 @@ public class Player : MonoBehaviour
         {
             worldAngle.y = 0f;//通常の向き
             this.transform.localEulerAngles = worldAngle;//自分の角度に代入する
-            position.x -= _speed * Time.deltaTime;
+            position.x -= statusdata.SPEED * Time.deltaTime;
         }
         else if (_inputVelocity.x > 0 && position.x < 2.5)
         {
             worldAngle.y = -180f;//右向きの角度
             this.transform.localEulerAngles = worldAngle;//自分の角度に代入
-            position.x += _speed * Time.deltaTime;
+            position.x += statusdata.SPEED * Time.deltaTime;
         }
         else
         {
