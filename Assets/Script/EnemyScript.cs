@@ -18,6 +18,14 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] GameObject Hitmark;//☑
     Vector3 Hitpos;//☑
 
+    public bool once = true;
+    [SerializeField] GameObject punchefect;
+    Vector3 punchpos;
+
+    float LifetimeCount = 0f;
+    [SerializeField] GameObject EXP_prefab;
+    [SerializeField] float Lifetime;
+
 
     void Start()
     {
@@ -52,7 +60,7 @@ public class EnemyScript : MonoBehaviour
                 currentTime = 0f;
                 MUTEKI = false;//無敵状態終わらせる
                 rb.velocity = new Vector2(0, 0);//ノックバックをとめる 
-                Hitmark.GetComponent<SpriteRenderer>().enabled = false; //ヒットマーク画像を非表示に戻す☑
+                punchefect.GetComponent<SpriteRenderer>().enabled = false; //ヒットマーク画像を非表示に戻す
             }
 
         }
@@ -63,11 +71,18 @@ public class EnemyScript : MonoBehaviour
             Hitpos.z = -2f;
             Hitmark.transform.position = Hitpos;
             Hitmark.GetComponent<SpriteRenderer>().enabled = true;
-            Destroy(this.gameObject);
+            LifetimeCount += Time.deltaTime;
+            if (LifetimeCount > Lifetime)
+            {
+                for (int i = 0; statusdata.EXP > i; i++)
+                {
+                    var exp = Instantiate(EXP_prefab, transform.position, transform.rotation);
+                }
+                Destroy(this.gameObject);
+            }
+
         }
     }
-
-
     public void Damage(float damage)
     {
         if (!MUTEKI)
