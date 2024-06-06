@@ -497,7 +497,7 @@ MonoBehaviour:
   punchefect: {fileID: 4159866259295693113}
   EXP_prefab: {fileID: 1591620285445037443, guid: acc521d0c5788ac40b3d0a502a9f9db9, type: 3}
   Lifetime: 0
-  clearbool: 1
+  clearbool: 0
   confetti: {fileID: 0}
   GameClear: {fileID: 0}
 --- !u!50 &4027686510627007106

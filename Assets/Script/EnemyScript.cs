@@ -68,7 +68,22 @@ public class EnemyScript : MonoBehaviour
                 rb.velocity = new Vector2(0, 0);//ノックバックをとめる 
                 punchefect.GetComponent<SpriteRenderer>().enabled = false; //ヒットマーク画像を非表示に戻す
             }
+        }
 
+        if (HP <= 0 && statusdata.Boss == true && clearbool == false)//ボスを倒した時一回だけ処理させる
+        {
+
+            clearbool = true;
+            GameClear = GameObject.Find("GameClearUI");
+            GameClear.GetComponent<Text>().enabled = true;
+            var confe = Instantiate(confetti, this.transform.position, transform.rotation);
+
+            StartCoroutine("GameClearfunc");
+            for (int i = 0; i < 100; i++)
+            {
+                Instantiate(confetti, this.transform.position, transform.rotation);
+            }
+            Debug.Log("ゲームクリア");
         }
 
         if (HP <= 0)//HPが0以下になったら消える
@@ -91,22 +106,6 @@ public class EnemyScript : MonoBehaviour
                     var zerachin = Instantiate(EXP_prefab, transform.position, transform.rotation);
                 }
                 Destroy(this.gameObject);
-            }
-
-            if (HP <= 0 && statusdata.Boss == true && clearbool == false)//ボスを倒した時一回だけ処理させる
-            {
-
-                clearbool = true;
-                GameClear = GameObject.Find("GameClearUI");
-                GameClear.GetComponent<Text>().enabled = true;
-                var confe = Instantiate(confetti, this.transform.position, transform.rotation);
-
-                StartCoroutine("GameClearfunc");
-                for (int i = 0; i < 100; i++)
-                {
-                    Instantiate(confetti, this.transform.position, transform.rotation);
-                }
-                Debug.Log("ゲームクリア");
             }
         }
     }

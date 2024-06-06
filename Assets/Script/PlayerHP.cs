@@ -17,6 +17,7 @@ public class PlayerHP : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         if (hpBar != null)
         {
             hpBar.maxValue = statusdata.MAXHP;
@@ -34,11 +35,10 @@ public class PlayerHP : MonoBehaviour
             currentTime += Time.deltaTime;
             if (currentTime > 0.2f)
             {
-                // Debug.Log("ç°ÇÕñ≥ìGÇ≈Ç∑");
+                Debug.Log("ç°ÇÕñ≥ìGÇ≈Ç∑");
                 currentTime = 0f;
                 MUTEKI = false;
             }
-
         }
     }
 
@@ -53,7 +53,7 @@ public class PlayerHP : MonoBehaviour
             {
                 hpBar.value = HP;
             }
-            if (HP < 0)
+            if (HP <= 0)
             {
                 Player.GetComponent<SpriteRenderer>().enabled = false;
                 GameOverUI.SetActive(true);

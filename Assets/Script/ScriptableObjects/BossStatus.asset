@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BossStatus
   m_EditorClassIdentifier: 
   NAME: Boss
-  MAXHP: 20
-  ATK: 1
+  MAXHP: 50
+  ATK: 2
   DEF: 3
   SPEED: 0.5
   NockBack: 0

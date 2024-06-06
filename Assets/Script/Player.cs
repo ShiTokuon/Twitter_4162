@@ -67,13 +67,13 @@ public class Player : MonoBehaviour
             _rigid.velocity = new Vector2(_rigid.velocity.x, 0);
         }
 
-        if (_inputVelocity.x < 0 && position.x > -2.5)
+        if (_inputVelocity.x < 0 && position.x > -3.2)
         {
             worldAngle.y = 0f;//’Êí‚ÌŒü‚«
             this.transform.localEulerAngles = worldAngle;//Ž©•ª‚ÌŠp“x‚É‘ã“ü‚·‚é
             position.x -= statusdata.SPEED * Time.deltaTime;
         }
-        else if (_inputVelocity.x > 0 && position.x < 2.5)
+        else if (_inputVelocity.x > 0 && position.x < 3.2)
         {
             worldAngle.y = -180f;//‰EŒü‚«‚ÌŠp“x
             this.transform.localEulerAngles = worldAngle;//Ž©•ª‚ÌŠp“x‚É‘ã“ü

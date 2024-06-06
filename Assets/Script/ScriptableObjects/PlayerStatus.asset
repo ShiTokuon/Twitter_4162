@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b745ee40ce01c4fab31f178c650eb8, type: 3}
   m_Name: PlayerStatus
   m_EditorClassIdentifier: 
-  MAXHP: 100
+  NAME: 
+  MAXHP: 500000
   ATK: 1
+  DEF: 0
   SPEED: 2
   NockBack: 3
   SPAN: 2
   EXP: 0
+  Boss: 0

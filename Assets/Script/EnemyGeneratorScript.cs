@@ -11,7 +11,7 @@ public class EnemyGeneratorScript : MonoBehaviour
     GameObject Player;
     Vector2 PlayerPos;//キャラクターの位置を代入する変数
     private float currentTime = 0f;
-    private float span = 3f;
+    private float span = 2f;
     //生成される方向を決める乱数用の変数
     int rndUD;
     int rndLR;//（左右）
@@ -21,34 +21,40 @@ public class EnemyGeneratorScript : MonoBehaviour
     //private GameObject enemychestPrefab;
     [SerializeField]
     private GameObject BossPrefab;
+    float myTime = 0;
 
     bool Chest1;
     bool Chest2;
     bool Boss;
 
+
     void Start()
     {
+        currentTime = 0f;
+        myTime = 0;
         Player = GameObject.FindGameObjectWithTag("Player");//Playerというタグを検索し、見つかったオブジェクトを代入する
     }
     void Update()
     {
         currentTime += Time.deltaTime;//時間経過をcurrentTimeに代入し時間を測る
+        myTime += Time.deltaTime;
+        Debug.Log(Time.deltaTime);
 
-        if (Time.time < 90f)
+        if (myTime < 90f)
         {
             if (currentTime > span)//spanで設定した3秒を越えたら処理を実行
             {
                 EnemyGenerate(EnemyPrefab);
                 currentTime = 0f;
             }
-            if (Time.time > 20 && Chest1 == false)
+            if (myTime > 50 && Chest1 == false)
             {
                 Chest1 = true;
                 //EnemyGenerate(enemychestPrefab);
                 currentTime = 0f;
             }
         }
-        if (90f < Time.time && Time.time < 150f)
+        if (90f < myTime && myTime < 151f)
         {
             if (currentTime > span)//3秒ごと
             {
@@ -57,18 +63,16 @@ public class EnemyGeneratorScript : MonoBehaviour
                 EnemyGenerate(EliteenemyPrefab);
                 currentTime = 0f;
             }
-            if (Time.time > 120f && Chest2 == false)
+            if (myTime > 90f && Chest2 == false)
             {
                 Chest2 = true;
                 //EnemyGenerate(enemychestPrefab);
                 currentTime = 0f;
             }
 
-            if (150f < Time.time && Boss == false)
+            if (150f < myTime && Boss == false)
             {
                 Boss = true;
-                EnemyGenerate(EnemyPrefab);
-                EnemyGenerate(EliteenemyPrefab);
                 EnemyGenerate(BossPrefab);
             }
         }
