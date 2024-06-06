@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b745ee40ce01c4fab31f178c650eb8, type: 3}
   m_Name: Enemy2
   m_EditorClassIdentifier: 
+  NAME: 
   MAXHP: 10
   ATK: 1
+  DEF: 0
   SPEED: 0.5
   NockBack: 1
   SPAN: 0.5
   EXP: 2
+  Boss: 0

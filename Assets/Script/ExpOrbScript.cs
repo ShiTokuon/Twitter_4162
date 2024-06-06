@@ -7,28 +7,29 @@ using UnityEngine.UI;
 public class ExpOrbScript : MonoBehaviour
 {
     [SerializeField] Text ExpText;
-    public int EXP;
+    public int Exp;
 
-    public AudioClip sound;
-    AudioClip getsound;
+    public AudioClip sound; // getsoundをsoundに変更
     AudioSource audioSource;
-    int Exp;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
-
     void Update()
     {
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
-            ExpManeger.instance.ExpBarDraw();
+            audioSource.PlayOneShot(sound);
+            Exp++;
+            ExpText.text = Exp.ToString();
+            ExpManeger.instance.ExpBarDraw();//経験値を拾った時に経験値バーの描画を更新する
             Destroy(this.gameObject);
         }
     }

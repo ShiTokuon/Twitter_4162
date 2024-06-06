@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class EnemyScript : MonoBehaviour
@@ -26,6 +27,11 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] GameObject EXP_prefab;
     [SerializeField] float Lifetime;
 
+    public bool clearbool;
+    [SerializeField]
+    GameObject confetti;
+    [SerializeField]
+    GameObject GameClear;
 
     void Start()
     {
@@ -67,21 +73,50 @@ public class EnemyScript : MonoBehaviour
 
         if (HP <= 0)//HPが0以下になったら消える
         {
+            Player.gameObject.GetComponent<PlayerHP>().Heal (1);//敵を倒したら１回復
             Hitpos = this.transform.position;
             Hitpos.z = -2f;
             Hitmark.transform.position = Hitpos;
-            Hitmark.GetComponent<SpriteRenderer>().enabled = true;
+            Hitmark.GetComponent<SpriteRenderer>().enabled = true;//ヒットマーク画像を表示する☑
+            punchpos = this.transform.position;
+            punchpos.z = -2f;
+            punchefect.transform.position = punchpos;
+            punchefect.GetComponent<SpriteRenderer>().enabled = true;
+
             LifetimeCount += Time.deltaTime;
             if (LifetimeCount > Lifetime)
             {
                 for (int i = 0; statusdata.EXP > i; i++)
                 {
-                    var exp = Instantiate(EXP_prefab, transform.position, transform.rotation);
+                    var zerachin = Instantiate(EXP_prefab, transform.position, transform.rotation);
                 }
                 Destroy(this.gameObject);
             }
 
+            if (HP <= 0 && statusdata.Boss == true && clearbool == false)//ボスを倒した時一回だけ処理させる
+            {
+
+                clearbool = true;
+                GameClear = GameObject.Find("GameClearUI");
+                GameClear.GetComponent<Text>().enabled = true;
+                var confe = Instantiate(confetti, this.transform.position, transform.rotation);
+
+                StartCoroutine("GameClearfunc");
+                for (int i = 0; i < 100; i++)
+                {
+                    Instantiate(confetti, this.transform.position, transform.rotation);
+                }
+                Debug.Log("ゲームクリア");
+            }
         }
+    }
+    IEnumerator GameClearfunc()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+        Hitmark.GetComponent<SpriteRenderer>().enabled = false;
+        yield return new WaitForSeconds(1f);
+
     }
     public void Damage(float damage)
     {
@@ -101,5 +136,13 @@ public class EnemyScript : MonoBehaviour
         Vector2 thisPos = transform.position;
         float distination = thisPos.x - PlayerPos.x;//攻撃を受けて時点での敵キャラとプレイヤーとの位置関係   
         rb.velocity = new Vector2(distination * nockback, 0);//殴った方向に飛んでいく
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<PlayerHP>().Damage(statusdata.ATK);
+        }
     }
 }

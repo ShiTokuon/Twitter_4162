@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 4027686510627007106}
   - component: {fileID: 4027686510627007107}
   m_Layer: 0
-  m_Name: Enemy2
+  m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,7 +393,7 @@ Transform:
   m_GameObject: {fileID: 4819291051226457144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03, y: -0.04, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4693586619369454961}
@@ -443,7 +443,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 18cb2f90ee88853468e4204acb0e21e5, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.33982182, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -491,15 +491,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec13ccfb70836d64e89e886f55f51ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusdata: {fileID: 11400000, guid: 4b3099177f345c341a4b4a6a92b512fc, type: 2}
+  statusdata: {fileID: 11400000, guid: 47439e22022df6d4cbdbf8bc5ac5bc5b, type: 2}
   Hitmark: {fileID: 4159866259295693113}
   once: 1
   punchefect: {fileID: 4159866259295693113}
   EXP_prefab: {fileID: 1591620285445037443, guid: acc521d0c5788ac40b3d0a502a9f9db9, type: 3}
   Lifetime: 0
-  clearbool: 1
-  confetti: {fileID: 0}
-  GameClear: {fileID: 0}
+  clearbool: 0
+  confetti: {fileID: 1591620285445037443, guid: d98fc4148f1cf4c47a43b8f883f856d5, type: 3}
+  GameClear: {fileID: 422391206324287057, guid: 561b3868840df664ea10b213985cbd6e, type: 3}
 --- !u!50 &4027686510627007106
 Rigidbody2D:
   serializedVersion: 4

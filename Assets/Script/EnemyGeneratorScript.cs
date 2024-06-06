@@ -17,6 +17,15 @@ public class EnemyGeneratorScript : MonoBehaviour
     int rndLR;//（左右）
     Vector2 enemyspwnPos;//生成される位置
 
+    //[SerializeField]
+    //private GameObject enemychestPrefab;
+    [SerializeField]
+    private GameObject BossPrefab;
+
+    bool Chest1;
+    bool Chest2;
+    bool Boss;
+
     void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");//Playerというタグを検索し、見つかったオブジェクトを代入する
@@ -25,22 +34,42 @@ public class EnemyGeneratorScript : MonoBehaviour
     {
         currentTime += Time.deltaTime;//時間経過をcurrentTimeに代入し時間を測る
 
-        if (Time.time < 60f)
+        if (Time.time < 90f)
         {
             if (currentTime > span)//spanで設定した3秒を越えたら処理を実行
             {
                 EnemyGenerate(EnemyPrefab);
                 currentTime = 0f;
             }
+            if (Time.time > 20 && Chest1 == false)
+            {
+                Chest1 = true;
+                //EnemyGenerate(enemychestPrefab);
+                currentTime = 0f;
+            }
         }
-        if (60f < Time.time)
+        if (90f < Time.time && Time.time < 150f)
         {
             if (currentTime > span)//3秒ごと
             {
                 // Debug.Log(span);
-                EnemyGenerate(EliteenemyPrefab);
                 EnemyGenerate(EnemyPrefab);
+                EnemyGenerate(EliteenemyPrefab);
                 currentTime = 0f;
+            }
+            if (Time.time > 120f && Chest2 == false)
+            {
+                Chest2 = true;
+                //EnemyGenerate(enemychestPrefab);
+                currentTime = 0f;
+            }
+
+            if (150f < Time.time && Boss == false)
+            {
+                Boss = true;
+                EnemyGenerate(EnemyPrefab);
+                EnemyGenerate(EliteenemyPrefab);
+                EnemyGenerate(BossPrefab);
             }
         }
     }
