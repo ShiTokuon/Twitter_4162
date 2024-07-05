@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStatus
   m_EditorClassIdentifier: 
   NAME: 
-  MAXHP: 500000
+  MAXHP: 50
   ATK: 1
   DEF: 0
   SPEED: 2
