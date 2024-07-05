@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
     {
         Vector3 position = transform.position;
 
-        if (_inputVelocity.y > 0 && position.y < 4.5)
+        if (_inputVelocity.y > 0 && position.y < 3)
         {
             position.y += statusdata.SPEED * Time.deltaTime;
         }
