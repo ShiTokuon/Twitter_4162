@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         {
             position.y += statusdata.SPEED * Time.deltaTime;
         }
-        else if (_inputVelocity.y < 0 && position.y > -4.5)
+        else if (_inputVelocity.y < 0 && position.y > -3.5)
         {
             position.y -= statusdata.SPEED * Time.deltaTime;
         }
