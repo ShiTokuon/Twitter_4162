@@ -5,11 +5,12 @@ using UnityEngine;
 public class AttackScript : MonoBehaviour
 {
     [SerializeField] StatusData statusdata;
-    public AudioClip sound;//☑
-    AudioSource audioSource;//☑
+    //public AudioClip sound;
+    //AudioSource audioSource;
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
+
     }
     void Update() { }
 
@@ -17,7 +18,8 @@ public class AttackScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            audioSource.PlayOneShot(sound);//☑
+            //audioSource.PlayOneShot(sound);//☑
+            AudioManager.Instance.PlaySE("小キック");
             other.gameObject.GetComponent<EnemyScript>().Damage(statusdata.ATK);
             other.gameObject.GetComponent<EnemyScript>().NockBack(statusdata.NockBack);
 
