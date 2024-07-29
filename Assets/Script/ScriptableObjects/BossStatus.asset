@@ -19,5 +19,5 @@ MonoBehaviour:
   SPEED: 0.5
   NockBack: 0
   SPAN: 0.1
-  EXP: 0
+  EXP: 1
   Boss: 1

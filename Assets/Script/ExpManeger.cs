@@ -16,8 +16,6 @@ public class ExpManeger : MonoBehaviour
     [SerializeField] Text LevelUPText;
     //public GamemanegerScript GMscript;
     int Exp;
-    AudioSource audioSource;
-    public AudioClip getsound;
     public static int currentExp;
     public static int CurrentLv;
     int NextLevel;
@@ -45,7 +43,6 @@ public class ExpManeger : MonoBehaviour
 
 
     public Slider EXPBar;
-    public AudioClip sound;
     // Start is called before the first frame update
 
     void Start()
@@ -63,7 +60,6 @@ public class ExpManeger : MonoBehaviour
             EXPBar.maxValue = NeedEXP;
             EXPBar.value = currentExp;
         }
-        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -72,6 +68,7 @@ public class ExpManeger : MonoBehaviour
         if (currentExp >= EXP[CurrentLv, 1])
         {
             Debug.Log("レベルアップ" + CurrentLv + "→" + NextLevel);
+            AudioManager.Instance.PlaySE("過去を思い出す", 0.3f);
             CurrentLv += 1;
             NextLevel += 1;
             NeedEXP = EXP[CurrentLv, 1]; // 修正
@@ -82,7 +79,6 @@ public class ExpManeger : MonoBehaviour
 
     private IEnumerator LevelUP()
     {
-        audioSource.PlayOneShot(sound);
         Vector3 position = transform.position;
         currentExp = 0;
         EXPBar.maxValue = NeedEXP; // 修正

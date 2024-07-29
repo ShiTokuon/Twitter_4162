@@ -9,12 +9,8 @@ public class ExpOrbScript : MonoBehaviour
     [SerializeField] Text ExpText;
     public int Exp;
 
-    public AudioClip sound; // getsoundをsoundに変更
-    AudioSource audioSource;
-
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -26,7 +22,7 @@ public class ExpOrbScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            audioSource.PlayOneShot(sound);
+            AudioManager.Instance.PlaySE("poka", 0.8f);
             Exp++;
             ExpText.text = Exp.ToString();
             ExpManeger.instance.ExpBarDraw();//経験値を拾った時に経験値バーの描画を更新する

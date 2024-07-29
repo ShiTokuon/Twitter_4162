@@ -19,7 +19,7 @@ public class AttackScript : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             //audioSource.PlayOneShot(sound);//☑
-            AudioManager.Instance.PlaySE("小キック");
+           AudioManager.Instance.PlaySE("小キック", 0.4f);
             other.gameObject.GetComponent<EnemyScript>().Damage(statusdata.ATK);
             other.gameObject.GetComponent<EnemyScript>().NockBack(statusdata.NockBack);
 

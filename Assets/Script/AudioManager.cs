@@ -27,9 +27,13 @@ public class AudioManager : MonoBehaviour
     //次流すBGM名、SE名
     private string _nextBGMName;
     private string _nextSEName;
+    private float _nextSEVolume = 1.0f;  //次に再生するSEの音量（デフォルトは1.0）
 
     //BGMをフェードアウト中か
     private bool _isFadeOut = false;
+
+    // 同じフレーム内で同じSEが再生されないようにするためのフラグ
+    private Dictionary<string, bool> _sePlayFlags;
 
     //BGM用、SE用に分けてオーディオソースを持つ
     private AudioSource _bgmSource;
@@ -47,6 +51,17 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+
         if (this != Instance)
         {
             Destroy(this);
@@ -100,6 +115,11 @@ public class AudioManager : MonoBehaviour
             _seDic[se.name] = se;
         }
 
+        _sePlayFlags = new Dictionary<string, bool>();
+        foreach (var seName in _seDic.Keys)
+        {
+            _sePlayFlags[seName] = false;
+        }
     }
 
     //=================================================================================
@@ -109,7 +129,7 @@ public class AudioManager : MonoBehaviour
     /// <summary>
     /// 指定したファイル名のSEを流す。第二引数のdelayに指定した時間だけ再生までの間隔を空ける
     /// </summary>
-    public void PlaySE(string seName, float delay = 0.0f)
+    public void PlaySE(string seName, float volume = 1.0f, float delay = 0.0f)
     {
         if (!_seDic.ContainsKey(seName))
         {
@@ -117,7 +137,17 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        foreach (AudioSource seSource in _seSourceList)
+        {
+            if (seSource.isPlaying && seSource.clip == _seDic[seName])
+            {
+                return;  // 既に再生中であれば何もしない
+            }
+        }
+
         _nextSEName = seName;
+        _nextSEVolume = volume;
+        _sePlayFlags[seName] = true;
         Invoke("DelayPlaySE", delay);
     }
 
@@ -127,7 +157,9 @@ public class AudioManager : MonoBehaviour
         {
             if (!seSource.isPlaying)
             {
+                seSource.volume = _nextSEVolume;
                 seSource.PlayOneShot(_seDic[_nextSEName] as AudioClip);
+                _sePlayFlags[_nextSEName] = false;
                 return;
             }
         }
