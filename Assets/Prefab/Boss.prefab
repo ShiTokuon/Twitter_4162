@@ -500,6 +500,7 @@ MonoBehaviour:
   clearbool: 0
   confetti: {fileID: 1591620285445037443, guid: d98fc4148f1cf4c47a43b8f883f856d5, type: 3}
   GameClear: {fileID: 422391206324287057, guid: 561b3868840df664ea10b213985cbd6e, type: 3}
+  button: {fileID: 7426327054820891564, guid: c1c611dcffccf654c801d76d5ee6b766, type: 3}
 --- !u!50 &4027686510627007106
 Rigidbody2D:
   serializedVersion: 4

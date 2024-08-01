@@ -38,7 +38,7 @@ public class EnemyGeneratorScript : MonoBehaviour
     {
         currentTime += Time.deltaTime;//ŽžŠÔŒo‰ß‚ðcurrentTime‚É‘ã“ü‚µŽžŠÔ‚ð‘ª‚é
         myTime += Time.deltaTime;
-        Debug.Log(Time.deltaTime);
+        //Debug.Log(Time.deltaTime);
 
         if (myTime < 90f)
         {

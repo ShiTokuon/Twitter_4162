@@ -7,16 +7,23 @@ using UnityEngine.UI;//UIを使用する際は宣言が必要
 
 public class PlayerHP : MonoBehaviour
 {
+    public static PlayerHP instance;
     [SerializeField] StatusData statusdata;
     public Slider hpBar;
-    float HP;
+    public float HP;
     bool MUTEKI;
     [SerializeField] GameObject GameOverUI;
+    [SerializeField] GameObject GameClearButton;
     [SerializeField] GameObject Player;
     float currentTime = 0f;
     // Start is called before the first frame update
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
         Time.timeScale = 1f;
         if (hpBar != null)
         {
@@ -26,7 +33,7 @@ public class PlayerHP : MonoBehaviour
         HP = statusdata.MAXHP;
     }
 
-    void Update()
+   void Update()
     {
         hpBar.maxValue = statusdata.MAXHP;
 
@@ -42,6 +49,12 @@ public class PlayerHP : MonoBehaviour
         }
     }
 
+    public void clear()
+    {
+
+            GameClearButton.SetActive(true);
+            
+    }
     public void Damage(float damage)
     {
         if (!MUTEKI)
@@ -59,6 +72,7 @@ public class PlayerHP : MonoBehaviour
                 GameOverUI.SetActive(true);
                 Time.timeScale = 0;
             }
+
         }
     }
 

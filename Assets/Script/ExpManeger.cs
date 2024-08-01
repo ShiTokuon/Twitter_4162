@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class ExpManeger : MonoBehaviour
     public static ExpManeger instance;
     [SerializeField] GameObject LevelUPpanelUI;
     [SerializeField] Text LevelText;
-    //[SerializeField] Text ItemName;
+    [SerializeField] Text ItemName;
     [SerializeField] Transform PlayerTrans;
     [SerializeField] GameObject Particle;
     [SerializeField] Text LevelUPText;
@@ -21,6 +22,7 @@ public class ExpManeger : MonoBehaviour
     int NextLevel;
     int NeedEXP;
     int CumEXP;//累計経験値
+
     public int[,] EXP =//レベルと必要経験値
         { { 1, 0},
         {2, 6},
@@ -39,7 +41,7 @@ public class ExpManeger : MonoBehaviour
         {14, 80},
 
     };
-    //Vector2 PlayerPos;
+    Vector2 PlayerPos;
 
 
     public Slider EXPBar;
@@ -79,14 +81,23 @@ public class ExpManeger : MonoBehaviour
 
     private IEnumerator LevelUP()
     {
-        Vector3 position = transform.position;
-        currentExp = 0;
-        EXPBar.maxValue = NeedEXP; // 修正
+       Vector3 position = transform.position;
+       EXPBar.maxValue = NeedEXP; // 修正
+        currentExp = 0;//現在の経験値を0にする
+        EXPBar.maxValue = NeedEXP;
         EXPBar.value = currentExp;
-        var confetti = Instantiate(Particle, position, transform.rotation);
+        var confetti = Instantiate(Particle, PlayerPos, transform.rotation);
+        leveluppanel();
         LevelUPText.GetComponent<Text>().enabled = true;
-        yield return new WaitForSeconds(2);
+        LevelUPpanelUI.GetComponent<Canvas>().enabled = true;
+        yield return new WaitForSeconds(2);//コルーチンで2秒遅延
         LevelUPText.GetComponent<Text>().enabled = false;
+    }
+
+    public void leveluppanel()
+    {
+        LevelUPpanelUI.GetComponent<Canvas>().enabled = true;
+        Time.timeScale = 0;//ポーズをする
     }
 
     public void ExpBarDraw()

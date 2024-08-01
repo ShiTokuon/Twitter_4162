@@ -13,8 +13,6 @@ public class DroneScript : MonoBehaviour
     GameObject[] targets;
     int DroneQuantity;
     float localdistance;
-    public AudioClip sound;
-    AudioSource audioSource;
     private float currentTime;
 
     void Start()
@@ -22,7 +20,6 @@ public class DroneScript : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");//PlayerというTagを持つオブジェクト検索する。
         PlayerPos = Player.transform.position;
         this.transform.parent = Player.transform;//生成された時自分自身をプレイヤーの子要素にする
-        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -35,9 +32,10 @@ public class DroneScript : MonoBehaviour
             currentTime = 0f;
         }
     }
+
     public void RayGenerate()
     {
-        audioSource.PlayOneShot(sound);
+        AudioManager.Instance.PlaySE("ショット命中", 0.1f);
         var ray = Instantiate(RayPrefab, transform.position, transform.rotation);
         ray.tag = "Drone"; // 新しく生成されたドローンにDroneタグを付ける
 
@@ -55,34 +53,35 @@ public class DroneScript : MonoBehaviour
         }
     }
     void PositionSet()
-    {//自分が何個目なのかによってポジションを決める
-        localdistance = 0.5f;//主人公との距離
+    {
+        //自分が何個目なのかによってポジションを決める
+        localdistance = 1.0f;//主人公との距離
         myPos = Player.transform.position;
         switch (DroneQuantity)
         {
             case 1://1個目の場合
-                myPos.x = localdistance;
-                myPos.y = localdistance;
+                myPos.x = 1;
+                myPos.y = 1;
                 transform.localPosition = myPos;
                 break;
             case 2://2個目の場合
-                myPos.x = -1 * localdistance;
-                myPos.y = -1 * localdistance;
+                myPos.x = -1 ;
+                myPos.y = -1 ;
                 transform.localPosition = myPos;
                 break;
             case 3://3一個目の場合
-                myPos.x = -1 * localdistance;
-                myPos.y = localdistance;
+                myPos.x = -1 ;
+                myPos.y = 1;
                 transform.localPosition = myPos;
                 break;
             case 4://4個目の場合
-                myPos.x = localdistance;
-                myPos.y = -1 * localdistance;
+                myPos.x = 1;
+                myPos.y = -1;
                 transform.localPosition = myPos;
                 break;
             case 5://5個目の場合
                 myPos.x = 0;
-                myPos.y = 2f;
+                myPos.y = 5f;
                 transform.localPosition = myPos;
                 break;
         }

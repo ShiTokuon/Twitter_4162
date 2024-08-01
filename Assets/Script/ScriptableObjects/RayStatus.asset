@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b745ee40ce01c4fab31f178c650eb8, type: 3}
   m_Name: RayStatus
   m_EditorClassIdentifier: 
+  NAME: 
   MAXHP: 0
   ATK: 1
+  DEF: 0
   SPEED: 2
   NockBack: 0
-  SPAN: 2
+  SPAN: 3
   EXP: 0
+  Boss: 0
