@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Enemy2
   m_EditorClassIdentifier: 
   NAME: 
-  MAXHP: 10
-  ATK: 1
-  DEF: 0
+  MAXHP: 15
+  ATK: 2
+  DEF: 1
   SPEED: 0.5
   NockBack: 1
   SPAN: 0.5

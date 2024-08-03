@@ -11,7 +11,7 @@ public class ExpManeger : MonoBehaviour
     public static ExpManeger instance;
     [SerializeField] GameObject LevelUPpanelUI;
     [SerializeField] Text LevelText;
-    [SerializeField] Text ItemName;
+    //[SerializeField] Text ItemName;
     [SerializeField] Transform PlayerTrans;
     [SerializeField] GameObject Particle;
     [SerializeField] Text LevelUPText;

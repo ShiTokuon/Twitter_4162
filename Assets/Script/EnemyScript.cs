@@ -79,7 +79,7 @@ public class EnemyScript : MonoBehaviour
         if (HP <= 0 && statusdata.Boss == true && clearbool == false)
         {
             clearbool = true;
-            GameClear = GameObject.Find("GameClearUI");
+            GameClear = GameObject.Find("GameClearTxt");
             GameClear.GetComponent<Text>().enabled = true;
             var confe = Instantiate(confetti, this.transform.position, transform.rotation);
 
