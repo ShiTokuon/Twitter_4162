@@ -500,7 +500,7 @@ MonoBehaviour:
   Lifetime: 0
   clearbool: 0
   confetti: {fileID: 0}
-  GameClear: {fileID: 422391206324287057, guid: 561b3868840df664ea10b213985cbd6e, type: 3}
+  GameClear: {fileID: 0}
 --- !u!50 &4027686510627007106
 Rigidbody2D:
   serializedVersion: 4

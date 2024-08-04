@@ -442,12 +442,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 18cb2f90ee88853468e4204acb0e21e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66c66248af7ee7b4abb717091daac72b, type: 3}
   m_Color: {r: 0, g: 0.33982182, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.3, y: 0.3}
+  m_Size: {x: 8.16, y: 9.08}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -470,8 +470,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.34, y: 1.6}
-    newSize: {x: 0.3, y: 0.3}
+    oldSize: {x: 1.8133334, y: 2.0177777}
+    newSize: {x: 8.16, y: 9.08}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -492,6 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusdata: {fileID: 11400000, guid: 47439e22022df6d4cbdbf8bc5ac5bc5b, type: 2}
+  HP: 0
   Hitmark: {fileID: 4159866259295693113}
   once: 1
   punchefect: {fileID: 4159866259295693113}
@@ -500,7 +501,6 @@ MonoBehaviour:
   clearbool: 0
   confetti: {fileID: 1591620285445037443, guid: d98fc4148f1cf4c47a43b8f883f856d5, type: 3}
   GameClear: {fileID: 422391206324287057, guid: 561b3868840df664ea10b213985cbd6e, type: 3}
-  button: {fileID: 7426327054820891564, guid: c1c611dcffccf654c801d76d5ee6b766, type: 3}
 --- !u!50 &4027686510627007106
 Rigidbody2D:
   serializedVersion: 4
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016323947501e9245bba2614f6bc434e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusdata: {fileID: 11400000, guid: be49b14cb6e3183429670df07ee9ffa3, type: 2}
+  statusdata: {fileID: 11400000, guid: 47439e22022df6d4cbdbf8bc5ac5bc5b, type: 2}
   hpSlider: {fileID: 1415014246594359826}
 --- !u!1 &5305809725760805124
 GameObject:

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NAME: 
   MAXHP: 50
-  ATK: 1
+  ATK: 1.1111111e+11
   DEF: 0
-  SPEED: 2
+  SPEED: 7
   NockBack: 3
   SPAN: 2
   EXP: 0
