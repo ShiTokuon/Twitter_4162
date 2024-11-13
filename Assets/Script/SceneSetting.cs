@@ -11,7 +11,7 @@ public class SceneSetting : MonoBehaviour
 
     void Start()
     {
-
+        ChangeResolution(760, 1080, false);
     }
 
     // Update is called once per frame
@@ -23,5 +23,10 @@ public class SceneSetting : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    void ChangeResolution(int width, int height, bool fullscreen)
+    {
+        Screen.SetResolution(width, height, fullscreen);
     }
 }

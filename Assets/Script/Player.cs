@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
 
     void Start()
-    {
+    { 
         _inputVelocity = Vector2.zero;
         _rigid = GetComponent<Rigidbody2D>();
         spriteRenderer.sprite = imageIdle;//‘Ò‹@ó‘Ô‚Ì‰æ‘œ
